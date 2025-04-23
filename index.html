@@ -14,13 +14,6 @@
       to { opacity: 1; }
     }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
     html, body {
       margin: 0;
       padding: 0;
@@ -32,18 +25,17 @@
     }
 
     #preloader {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 1;
-  transition: opacity 1s ease;
-   }
-
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
 
     #preloader img {
       width: 180px;
@@ -180,13 +172,15 @@
       const preloader = document.getElementById("preloader");
       setTimeout(() => {
         preloader.style.opacity = "0";
-setTimeout(() => {
-  preloader.style.display = "none";
-    }, 1000); // tempo identico al transition
-    
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 1000); // tempo identico al transition
+      }, 100); // piccola attesa per assicurare il rendering iniziale
+    });
   </script>
 
 </body>
 </html>
+
 
 
