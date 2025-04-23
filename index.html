@@ -153,31 +153,36 @@
 
   <!-- Script per toggle audio e preloader -->
   <script>
-    const audio = document.getElementById('bg-music');
-    const toggleBtn = document.getElementById('audio-toggle');
-    let playing = false;
+  const audio = document.getElementById('bg-music');
+  const toggleBtn = document.getElementById('audio-toggle');
+  let playing = false;
 
-    function toggleAudio() {
-      if (playing) {
-        audio.pause();
-        toggleBtn.textContent = '🔈';
-      } else {
-        audio.play();
-        toggleBtn.textContent = '🔊';
-      }
-      playing = !playing;
+  function toggleAudio() {
+    if (playing) {
+      audio.pause();
+      toggleBtn.textContent = '🔈';
+    } else {
+      audio.play();
+      toggleBtn.textContent = '🔊';
     }
+    playing = !playing;
+  }
 
-    window.addEventListener("load", function () {
-      const preloader = document.getElementById("preloader");
+  window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+
+    // Aspetta 2 secondi prima di iniziare la dissolvenza
+    setTimeout(() => {
+      preloader.style.opacity = "0";
+
+      // Dopo 1 secondo (il tempo della transizione), nasconde il preloader
       setTimeout(() => {
-        preloader.style.opacity = "0";
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 1000); // tempo identico al transition
-      }, 100); // piccola attesa per assicurare il rendering iniziale
-    });
-  </script>
+        preloader.style.display = "none";
+      }, 1000);
+    }, 2000); // Tempo visibile del preloader (2s)
+  });
+</script>
+
 
 </body>
 </html>
