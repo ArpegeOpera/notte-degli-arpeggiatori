@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Notte degli Arpeggiatori</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 5vh 5vw;
+    }
+
+    .title {
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 4vh;
+    }
+
+    .title img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .buttons {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5vh;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: rgba(153, 0, 0, 0.85);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid gold;
+      border-radius: 2rem;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover, .btn:active {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">
+      <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+    </div>
+    <div class="buttons">
+      <a href="#" class="btn">PROGRAMMA DOMENICA</a>
+      <a href="#" class="btn">PROGRAMMA LUNEDÌ</a>
+      <a href="#" class="btn">GRUPPO WHATSAPP</a>
+      <a href="#" class="btn">SCOPRI IL TUO POSTO</a>
+    </div>
+  </div>
+</body>
+</html>
