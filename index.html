@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Notte degli Arpeggiatori</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 5vh 5vw 2vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+    }
+
+    .title {
+      margin-top: 5vh;
+      margin-bottom: 4vh;
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .title img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .buttons {
+      margin-top: auto;
+      margin-bottom: 6vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3vh;
+      align-items: center;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: rgba(153, 0, 0, 0.85);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid gold;
+      border-radius: 1.8rem;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover, .btn:active {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">
+      <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+    </div>
+    <div class="buttons">
+      <a href="#" class="btn">PROGRAMMA DOMENICA</a>
+      <a href="#" class="btn">PROGRAMMA LUNEDÌ</a>
+      <a href="#" class="btn">GRUPPO WHATSAPP</a>
+      <a href="#" class="btn">SCOPRI IL TUO POSTO</a>
+    </div>
+  </div>
+</body>
+</html>
