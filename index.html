@@ -10,18 +10,17 @@
     * {
       box-sizing: border-box;
     }
-    @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-  }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: 'Montserrat', sans-serif;
-      /*font-family: sans-serif;*/
       background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
       background-size: cover;
       animation: fadeIn 2s ease-in-out;
@@ -59,11 +58,11 @@
     .btn {
       width: 100%;
       padding: 1rem 1.5rem;
-      background: rgba(153, 0, 0, 0.90);  /*trasparenza pulsanti */
+      background: rgba(153, 0, 0, 0.90);
       color: white;
       font-size: 1rem;
       font-weight: bold;
-      border: 4px solid gold;  /*spessore bordi*/
+      border: 4px solid gold;
       border-radius: 2rem;
       text-align: center;
       text-decoration: none;
@@ -74,9 +73,37 @@
       transform: scale(1.05);
       box-shadow: 0 0 10px gold;
     }
+
+    #audio-toggle {
+      position: fixed;
+      top: 2vh;
+      right: 2vw;
+      font-size: 1.8rem;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0.7;
+      transition: transform 0.2s;
+    }
+
+    #audio-toggle:hover {
+      transform: scale(1.2);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Pulsante audio in alto a destra -->
+  <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <div class="title">
       <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
@@ -86,14 +113,27 @@
       <a href="#" class="btn">PROGRAMMA LUNEDÌ</a>
       <a href="#" class="btn">GRUPPO WHATSAPP</a>
       <a href="#" class="btn">SCOPRI IL TUO POSTO</a>
-      <button class="btn" onclick="document.getElementById('bg-music').play()">AVVIA MUSICA</button>
-
     </div>
   </div>
-  <!-- Musica di sottofondo -->
-<audio id="bg-music" loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+
+  <!-- Script per toggle audio -->
+  <script>
+    const audio = document.getElementById('bg-music');
+    const toggleBtn = document.getElementById('audio-toggle');
+    let playing = false;
+
+    function toggleAudio() {
+      if (playing) {
+        audio.pause();
+        toggleBtn.textContent = '🔈';
+      } else {
+        audio.play();
+        toggleBtn.textContent = '🔊';
+      }
+      playing = !playing;
+    }
+  </script>
 
 </body>
 </html>
+
