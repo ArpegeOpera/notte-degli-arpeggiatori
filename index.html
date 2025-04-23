@@ -7,13 +7,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
 
     html, body {
@@ -24,6 +29,24 @@
       background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
       background-size: cover;
       animation: fadeIn 2s ease-in-out;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    #preloader img {
+      width: 180px;
+      animation: fadeIn 1.5s ease;
     }
 
     .container {
@@ -92,17 +115,36 @@
       transform: scale(1.2);
       opacity: 1;
     }
+
+    #fixed-logo {
+      position: fixed;
+      bottom: 2vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      opacity: 0.15;
+      z-index: 10;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Pulsante audio in alto a destra -->
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="NDA_TITOLO.png" alt="Logo" />
+  </div>
+
+  <!-- Pulsante audio -->
   <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
 
   <!-- Audio -->
   <audio id="bg-music" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
+
+  <!-- Logo fisso in basso -->
+  <img src="logo.png" alt="Logo Arpeggiatori" id="fixed-logo">
 
   <div class="container">
     <div class="title">
@@ -116,7 +158,7 @@
     </div>
   </div>
 
-  <!-- Script per toggle audio -->
+  <!-- Script per toggle audio e preloader -->
   <script>
     const audio = document.getElementById('bg-music');
     const toggleBtn = document.getElementById('audio-toggle');
@@ -132,8 +174,16 @@
       }
       playing = !playing;
     }
+
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 3000);
+    });
   </script>
 
 </body>
 </html>
+
 
