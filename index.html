@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -119,6 +118,27 @@
       z-index: 10;
       pointer-events: none;
     }
+
+    /* =====================
+       NUOVO STILE PER I 3 LOGHI IN BASSO
+       ===================== */
+    #bottom-logos {
+      position: fixed;
+      bottom: 2vh;                     /* Regola quanto vuoi che siano “vicini” al bordo inferiore */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 2vw;                        /* Spazio orizzontale fra le immagini */
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;           /* Se non vuoi che siano cliccabili */
+    }
+
+    #bottom-logos img {
+      height: 50px;                   /* Puoi variare l’altezza a piacere */
+      width: auto;
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
@@ -136,7 +156,7 @@
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Logo fisso in basso -->
+  <!-- Logo fisso in basso già esistente -->
   <img src="logo.png" alt="Logo Arpeggiatori" id="fixed-logo">
 
   <div class="container">
@@ -151,41 +171,48 @@
     </div>
   </div>
 
+  <!-- I TRE LOGHI DA METTERE IN BASSO, AFFIANCATI -->
+  <div id="bottom-logos">
+    <img src="dyson.png"    alt="Logo Dyson">
+    <img src="emsibeth.png" alt="Logo Emsibeth">
+    <img src="viangi.png"   alt="Logo Viangi">
+  </div>
+
   <!-- Script per toggle audio e preloader -->
   <script>
-  const audio = document.getElementById('bg-music');
-  const toggleBtn = document.getElementById('audio-toggle');
-  let playing = false;
+    const audio = document.getElementById('bg-music');
+    const toggleBtn = document.getElementById('audio-toggle');
+    let playing = false;
 
-  function toggleAudio() {
-    if (playing) {
-      audio.pause();
-      toggleBtn.textContent = '🔈';
-    } else {
-      audio.play();
-      toggleBtn.textContent = '🔊';
+    function toggleAudio() {
+      if (playing) {
+        audio.pause();
+        toggleBtn.textContent = '🔈';
+      } else {
+        audio.play();
+        toggleBtn.textContent = '🔊';
+      }
+      playing = !playing;
     }
-    playing = !playing;
-  }
 
-  window.addEventListener("load", function () {
-    const preloader = document.getElementById("preloader");
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
 
-    // Aspetta 2 secondi prima di iniziare la dissolvenza
-    setTimeout(() => {
-      preloader.style.opacity = "0";
-
-      // Dopo 1 secondo (il tempo della transizione), nasconde il preloader
+      // Aspetta 2 secondi prima di iniziare la dissolvenza
       setTimeout(() => {
-        preloader.style.display = "none";
-      }, 2000);
-    }, 3000); // Tempo visibile del preloader (3s)
-  });
-</script>
+        preloader.style.opacity = "0";
 
+        // Dopo 1 secondo (il tempo della transizione), nasconde il preloader
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 2000);
+      }, 3000); // Tempo visibile del preloader (3s)
+    });
+  </script>
 
 </body>
 </html>
+
 
 
 
