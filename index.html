@@ -6,8 +6,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
+    /* =============================
+       STILI GENERALI E PRELOADER
+       ============================= */
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     @keyframes fadeIn {
@@ -16,8 +21,6 @@
     }
 
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
       font-family: 'Montserrat', sans-serif;
       background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
@@ -43,6 +46,9 @@
       animation: fadeIn 1.5s ease;
     }
 
+    /* =============================
+       STRUTTURA PRINCIPALE DELLA PAGINA
+       ============================= */
     .container {
       display: flex;
       flex-direction: column;
@@ -111,39 +117,58 @@
       opacity: 1;
     }
 
-    /* ================================================
-       CONTAINER PER TUTTI E QUATTRO I LOGHI IN BASSO
-       ================================================
-    */
-    #bottom-logos {
+    /* =============================
+       BANDA ORIZZONTALE SCORREVOLE (MARQUEE) – LOGHI
+       ============================= */
+    #logo-marquee-wrapper {
       position: fixed;
-      bottom: 2vh;                    /* distanza dal bordo inferiore */
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;                  /* flex in riga di base */
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 2vw;                       /* spazio orizzontale tra ogni logo */
-      z-index: 10;
-      pointer-events: none;           /* i loghi non sono cliccabili */
+      bottom: 0;                /* Sempre attaccato al fondo */
+      left: 0;
+      width: 100%;
+      background: transparent;  /* Banda trasparente */
+      overflow: hidden;         /* Nasconde i loghi fuori dallo schermo */
+      padding: 10px 0;          /* Spazio sopra e sotto i loghi */
+      z-index: 100;             /* In primo piano rispetto al contenuto sottostante */
     }
 
-    #bottom-logos img {
-      max-height: 50px;               /* altezza uniforme per tutti i loghi */
+    #logo-marquee {
+      display: inline-block;    /* Per permettere white-space: nowrap */
+      white-space: nowrap;      /* Tutti i loghi in un’unica riga, senza andare a capo */
+      animation: scroll-logos 25s linear infinite; /* Durata animazione: 25s, puoi modificarla */
+    }
+
+    #logo-marquee img {
+      vertical-align: middle;
+      max-height: 50px;         /* Altezza uniforme per tutti i loghi */
       width: auto;
-      opacity: 0.9;
+      margin: 0 30px;           /* Spazio orizzontale tra i loghi */
+      opacity: 0.9;             /* Leggera trasparenza */
     }
 
-    /* Riduci un po’ la dimensione su schermi stretti */
+    /* Keyframes per l’animazione */
+    @keyframes scroll-logos {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Media query per schermi piccoli (riduce dimensioni loghi e gap) */
     @media (max-width: 480px) {
-      #bottom-logos {
-        bottom: 1vh;
-        gap: 4vw;
+      #logo-marquee-wrapper {
+        padding: 5px 0;
       }
-      #bottom-logos img {
-        max-height: 60px;
+      #logo-marquee img {
+        max-height: 40px;
+        margin: 0 20px;
       }
+      /* Se serve, allunga un po’ la durata dell’animazione su mobile:
+      #logo-marquee {
+        animation-duration: 30s;
+      }
+      */
     }
   </style>
 </head>
@@ -154,14 +179,15 @@
     <img src="NDA_TITOLO.png" alt="Logo" />
   </div>
 
-  <!-- Pulsante audio -->
+  <!-- Pulsante per attivare/disattivare audio -->
   <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
 
-  <!-- Audio -->
+  <!-- Audio in background -->
   <audio id="bg-music" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Contenuto principale: titolo e pulsanti -->
   <div class="container">
     <div class="title">
       <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
@@ -175,17 +201,48 @@
   </div>
 
   <!--
-    CONTAINER DEI 4 LOGHI: logo.png + dyson.png + emsibeth.png + viangi.png
-    Sono affiancati, tutti con la stessa altezza massima di 50px.
+    BANDA DI LOGHI SCORREVOLI IN BASSO.
+    Inserisci i tuoi file PNG/JPG all’interno di #logo-marquee
+    Duplicali esattamente per creare un loop continuo.
   -->
-  <div id="bottom-logos">
-    <img src="logo.png"     alt="Logo Arpeggiatori">
-    <img src="dyson.png"    alt="Logo Dyson">
-    <img src="emsibeth.png" alt="Logo Emsibeth">
-    <img src="viangi.png"   alt="Logo Viangi">
+  <div id="logo-marquee-wrapper">
+    <div id="logo-marquee">
+      <!-- ===============================
+           PRIMA “METÀ” DEI LOGHI (ORIGINALE)
+           Per aggiungere un nuovo logo:
+           1) Copia qui sotto questa riga
+           2) Cambia src="nuovo-logo.png" e alt="Nuovo Logo"
+           3) Poi ricorda di duplicare la stessa riga nella SECONDA META’
+           =============================== -->
+
+      <img src="logo.png"                     alt="Logo Arpeggiatori">
+      <img src="estetica.png"                 alt="Logo Estetica">
+      <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
+      <img src="dyson.png"                    alt="Logo Dyson">
+      <img src="emsibeth.png"                 alt="Logo Emsibeth">
+      <!-- Se hai altri loghi, aggiungili qui:
+      <img src="altro-logo1.png" alt="Altro Logo 1">
+      <img src="altro-logo2.png" alt="Altro Logo 2">
+      -->
+
+      <!-- ===============================
+           SECONDA “METÀ” DEI LOGHI (DUPLICA QUI SOPRA ESATTAMENTE LE STESSE RIGHE)
+           Serve per garantire lo scorrimento continuo senza interruzioni.
+           =============================== -->
+
+      <img src="logo.png"                     alt="Logo Arpeggiatori">
+      <img src="estetica.png"                 alt="Logo Estetica">
+      <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
+      <img src="dyson.png"                    alt="Logo Dyson">
+      <img src="emsibeth.png"                 alt="Logo Emsibeth">
+      <!-- Duplica anche eventuali altri loghi inseriti sopra:
+      <img src="altro-logo1.png" alt="Altro Logo 1">
+      <img src="altro-logo2.png" alt="Altro Logo 2">
+      -->
+    </div>
   </div>
 
-  <!-- Script per toggle audio e preloader -->
+  <!-- Script per il toggle audio e il preloader -->
   <script>
     const audio = document.getElementById('bg-music');
     const toggleBtn = document.getElementById('audio-toggle');
@@ -205,10 +262,10 @@
     window.addEventListener("load", function () {
       const preloader = document.getElementById("preloader");
 
-      // Dopo 3s, inizia la dissolvenza del preloader
+      // 3 secondi di tempo visibile al preloader, poi dissolve
       setTimeout(() => {
         preloader.style.opacity = "0";
-        // Dopo 2s (tempo di transizione), nasconde definitivamente
+        // Dopo 2 secondi (tempo transizione), lo rimuove dal DOM
         setTimeout(() => {
           preloader.style.display = "none";
         }, 2000);
