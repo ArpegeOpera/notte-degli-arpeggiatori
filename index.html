@@ -6,11 +6,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; }
-      to { opacity: 1; }
+      to   { opacity: 1; }
     }
 
     html, body {
@@ -84,7 +86,8 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .btn:hover, .btn:active {
+    .btn:hover,
+    .btn:active {
       transform: scale(1.05);
       box-shadow: 0 0 10px gold;
     }
@@ -108,36 +111,39 @@
       opacity: 1;
     }
 
-    #fixed-logo {
-      position: fixed;
-      bottom: -2vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      opacity: 0.90;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* =====================
-       NUOVO STILE PER I 3 LOGHI IN BASSO
-       ===================== */
+    /* ================================================
+       CONTAINER PER TUTTI E QUATTRO I LOGHI IN BASSO
+       ================================================
+    */
     #bottom-logos {
       position: fixed;
-      bottom: 2vh;                     /* Regola quanto vuoi che siano “vicini” al bordo inferiore */
+      bottom: 2vh;                    /* distanza dal bordo inferiore */
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      gap: 2vw;                        /* Spazio orizzontale fra le immagini */
+      display: flex;                  /* flex in riga di base */
+      flex-direction: row;
       align-items: center;
+      justify-content: center;
+      gap: 2vw;                       /* spazio orizzontale tra ogni logo */
       z-index: 10;
-      pointer-events: none;           /* Se non vuoi che siano cliccabili */
+      pointer-events: none;           /* i loghi non sono cliccabili */
     }
 
     #bottom-logos img {
-      height: 50px;                   /* Puoi variare l’altezza a piacere */
+      max-height: 50px;               /* altezza uniforme per tutti i loghi */
       width: auto;
       opacity: 0.9;
+    }
+
+    /* Riduci un po’ la dimensione su schermi stretti */
+    @media (max-width: 480px) {
+      #bottom-logos {
+        bottom: 1vh;
+        gap: 4vw;
+      }
+      #bottom-logos img {
+        max-height: 40px;
+      }
     }
   </style>
 </head>
@@ -156,9 +162,6 @@
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Logo fisso in basso già esistente -->
-  <img src="logo.png" alt="Logo Arpeggiatori" id="fixed-logo">
-
   <div class="container">
     <div class="title">
       <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
@@ -171,8 +174,12 @@
     </div>
   </div>
 
-  <!-- I TRE LOGHI DA METTERE IN BASSO, AFFIANCATI -->
+  <!--
+    CONTAINER DEI 4 LOGHI: logo.png + dyson.png + emsibeth.png + viangi.png
+    Sono affiancati, tutti con la stessa altezza massima di 50px.
+  -->
   <div id="bottom-logos">
+    <img src="logo.png"     alt="Logo Arpeggiatori">
     <img src="dyson.png"    alt="Logo Dyson">
     <img src="emsibeth.png" alt="Logo Emsibeth">
     <img src="viangi.png"   alt="Logo Viangi">
@@ -198,20 +205,19 @@
     window.addEventListener("load", function () {
       const preloader = document.getElementById("preloader");
 
-      // Aspetta 2 secondi prima di iniziare la dissolvenza
+      // Dopo 3s, inizia la dissolvenza del preloader
       setTimeout(() => {
         preloader.style.opacity = "0";
-
-        // Dopo 1 secondo (il tempo della transizione), nasconde il preloader
+        // Dopo 2s (tempo di transizione), nasconde definitivamente
         setTimeout(() => {
           preloader.style.display = "none";
         }, 2000);
-      }, 3000); // Tempo visibile del preloader (3s)
+      }, 3000);
     });
   </script>
-
 </body>
 </html>
+
 
 
 
