@@ -7,7 +7,7 @@
   <title>La Notte degli Arpeggiatori</title>
   <style>
     /* =============================
-       STILI GENERALI E PRELOADER
+       RESET/BASE + PRELOADER
        ============================= */
     * {
       box-sizing: border-box;
@@ -20,8 +20,15 @@
       to   { opacity: 1; }
     }
 
+    /*
+      Blocchiamo lo scroll (overflow hidden) e il bounce sui dispositivi touch
+      (overscroll-behavior: none). In questo modo la pagina risulta completamente
+      statica sia su desktop che su mobile.
+    */
     html, body {
       height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
       font-family: 'Montserrat', sans-serif;
       background: url('NDA_Sfondo.jpg') no-repeat center center fixed;
       background-size: cover;
@@ -46,21 +53,31 @@
       animation: fadeIn 1.5s ease;
     }
 
+    /* =================================================
+       WRAPPER PRINCIPALE (CENTRATO, MAX-WIDTH DA MOBILE)
+       ================================================= */
+    .main-wrapper {
+      max-width: 400px;           /* Larghezza massima (come su mobile) */
+      margin: 0 auto;             /* Centra orizzontalmente sul desktop */
+      position: relative;         /* Per contenere preloader e pulsante audio */
+      min-height: 100vh;          /* Occupa tutta l’altezza disponibile */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Lascia spazio per il marquee in basso */
+    }
+
     /* =============================
-       STRUTTURA PRINCIPALE DELLA PAGINA
+       STRUTTURA INTERNA ALLA COLONNA
        ============================= */
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100%;
       padding: 5vh 5vw;
     }
 
     .title {
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
       margin-bottom: 8vh;
     }
 
@@ -72,7 +89,6 @@
 
     .buttons {
       width: 100%;
-      max-width: 400px;
       display: flex;
       flex-direction: column;
       gap: 2.5vh;
@@ -99,7 +115,7 @@
     }
 
     #audio-toggle {
-      position: fixed;
+      position: absolute;   /* Posizionato rispetto a .main-wrapper */
       top: 2vh;
       right: 2vw;
       font-size: 1.8rem;
@@ -118,129 +134,141 @@
     }
 
     /* =============================
-       BANDA ORIZZONTALE SCORREVOLE (MARQUEE) – LOGHI
+       BANDA ORIZZONTALE SCORREVOLE – LOGHI
        ============================= */
     #logo-marquee-wrapper {
-      position: fixed;
-      bottom: 0;                /* Sempre attaccato al fondo */
-      left: 0;
       width: 100%;
-      background: transparent;  /* Banda trasparente */
-      overflow: hidden;         /* Nasconde i loghi fuori dallo schermo */
-      padding: 10px 0;          /* Spazio sopra e sotto i loghi */
-      z-index: 100;             /* In primo piano rispetto al contenuto sottostante */
+      background: transparent;   /* Banda completamente trasparente */
+      overflow: hidden;          /* Nasconde i loghi fuori dall’area visibile */
+      padding: 10px 0;           /* Spazio sopra e sotto i loghi */
+      z-index: 100;              /* Sopra il contenuto sottostante */
     }
 
     #logo-marquee {
-      display: inline-block;    /* Per permettere white-space: nowrap */
-      white-space: nowrap;      /* Tutti i loghi in un’unica riga, senza andare a capo */
-      animation: scroll-logos 25s linear infinite; /* Durata animazione: 25s, puoi modificarla */
+      display: inline-block;     /* Permette white-space: nowrap */
+      white-space: nowrap;       /* Tutti i loghi su un’unica riga, senza andare a capo */
+      animation: scroll-logos 25s linear infinite; /* Durata dell’animazione */
+    }
+
+    /* Ogni logo è avvolto in <a> per renderlo cliccabile.
+       Modifica l’attributo href="..." a piacere in futuro. */
+    #logo-marquee a {
+      display: inline-block;     /* Per far funzionare margini e allineamento */
+      vertical-align: middle;
     }
 
     #logo-marquee img {
-      vertical-align: middle;
-      max-height: 90px;         /* Altezza uniforme per tutti i loghi */
+      max-height: 90px;          /* Altezza uniforme su desktop e mobile */
       width: auto;
-      margin: 0 30px;           /* Spazio orizzontale tra i loghi */
-      opacity: 0.9;             /* Leggera trasparenza */
+      margin: 0 30px;            /* Spazio orizzontale tra i loghi */
+      opacity: 0.9;              /* Leggera trasparenza */
+      transition: transform 0.2s;
     }
 
-    /* Keyframes per l’animazione */
+    #logo-marquee img:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
     @keyframes scroll-logos {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    /* Media query per schermi piccoli (riduce dimensioni loghi e gap) */
-    @media (max-width: 480px) {
-      #logo-marquee-wrapper {
-        padding: 5px 0;
-      }
-      #logo-marquee img {
-        max-height: 90px;
-        margin: 0 20px;
-      }
-      /* Se serve, allunga un po’ la durata dell’animazione su mobile:
-      #logo-marquee {
-        animation-duration: 30s;
-      }
-      */
-    }
+    /* 
+      Il codice per mobile/desktop è identico, non ci sono media query specifiche qui.
+      Se in futuro desideri cambiare qualcosa solo per mobile, aggiungi una @media query.
+    */
   </style>
 </head>
 <body>
 
-  <!-- Preloader -->
-  <div id="preloader">
-    <img src="NDA_TITOLO.png" alt="Logo" />
-  </div>
-
-  <!-- Pulsante per attivare/disattivare audio -->
-  <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
-
-  <!-- Audio in background -->
-  <audio id="bg-music" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Contenuto principale: titolo e pulsanti -->
-  <div class="container">
-    <div class="title">
-      <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+  <div class="main-wrapper">
+    <!-- Preloader -->
+    <div id="preloader">
+      <img src="NDA_TITOLO.png" alt="Logo" />
     </div>
-    <div class="buttons">
-      <a href="#" class="btn">PROGRAMMA DOMENICA</a>
-      <a href="#" class="btn">PROGRAMMA LUNEDÌ</a>
-      <a href="#" class="btn">GRUPPO WHATSAPP</a>
-      <a href="#" class="btn">SCOPRI IL TUO POSTO</a>
+
+    <!-- Pulsante per attivare/disattivare audio -->
+    <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
+
+    <!-- Audio in background -->
+    <audio id="bg-music" loop>
+      <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Contenuto principale: titolo e pulsanti -->
+    <div class="container">
+      <div class="title">
+        <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+      </div>
+      <div class="buttons">
+        <a href="#" class="btn">PROGRAMMA DOMENICA</a>
+        <a href="#" class="btn">PROGRAMMA LUNEDÌ</a>
+        <a href="#" class="btn">GRUPPO WHATSAPP</a>
+        <a href="#" class="btn">SCOPRI IL TUO POSTO</a>
+      </div>
     </div>
-  </div>
 
-  <!--
-    BANDA DI LOGHI SCORREVOLI IN BASSO.
-    Inserisci i tuoi file PNG/JPG all’interno di #logo-marquee
-    Duplicali esattamente per creare un loop continuo.
-  -->
-  <div id="logo-marquee-wrapper">
-    <div id="logo-marquee">
-      <!-- ===============================
-           PRIMA “METÀ” DEI LOGHI (ORIGINALE)
-           Per aggiungere un nuovo logo:
-           1) Copia qui sotto questa riga
-           2) Cambia src="nuovo-logo.png" e alt="Nuovo Logo"
-           3) Poi ricorda di duplicare la stessa riga nella SECONDA META’
-           =============================== -->
-
-      <img src="logo.png"                     alt="Logo Arpeggiatori">
-      <img src="estetica.png"                 alt="Logo Estetica">
-      <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
-      <img src="dyson.png"                    alt="Logo Dyson">
-      <img src="emsibeth.png"                 alt="Logo Emsibeth">
-      <!-- Se hai altri loghi, aggiungili qui:
-      <img src="altro-logo1.png" alt="Altro Logo 1">
-      <img src="altro-logo2.png" alt="Altro Logo 2">
-      -->
-
-      <!-- ===============================
-           SECONDA “METÀ” DEI LOGHI (DUPLICA QUI SOPRA ESATTAMENTE LE STESSE RIGHE)
-           Serve per garantire lo scorrimento continuo senza interruzioni.
-           =============================== -->
-
-      <img src="logo.png"                     alt="Logo Arpeggiatori">
-      <img src="estetica.png"                 alt="Logo Estetica">
-      <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
-      <img src="dyson.png"                    alt="Logo Dyson">
-      <img src="emsibeth.png"                 alt="Logo Emsibeth">
-      <!-- Duplica anche eventuali altri loghi inseriti sopra:
-      <img src="altro-logo1.png" alt="Altro Logo 1">
-      <img src="altro-logo2.png" alt="Altro Logo 2">
-      -->
+    <!-- BANDA DI LOGHI SCORREVOLI IN BASSO -->
+    <div id="logo-marquee-wrapper">
+      <div id="logo-marquee">
+        <!-- ===============================
+             PRIMA “METÀ” DEI LOGHI (ORIGINALE)
+             Per modificare il link di un logo:
+             1) Cambia href="URL_DEL_LOGO" con l’URL desiderato
+             2) Mantieni l’ordine delle righe
+             =============================== -->
+        <a href="https://www.casarpege.it/" target="_blank" rel="noopener noreferrer">
+          <img src="logo.png" alt="Logo Arpeggiatori">
+        </a>
+        <a href="https://www.estetica.it/" target="_blank" rel="noopener noreferrer">
+          <img src="estetica.png" alt="Logo Estetica">
+        </a>
+        <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank" rel="noopener noreferrer">
+          <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere">
+        </a>
+        <a href="https://www.dyson.it/it" target="_blank" rel="noopener noreferrer">
+          <img src="dyson.png" alt="Logo Dyson">
+        </a>
+        <a href="https://www.emsibeth.it/" target="_blank" rel="noopener noreferrer">
+          <img src="emsibeth.png" alt="Logo Emsibeth">
+        </a>
+        
+        <!-- Se hai altri loghi, aggiungili qui:
+        <a href="https://url-nuovo-partner.it" target="_blank" rel="noopener noreferrer">
+          <img src="altro-logo1.png" alt="Altro Logo 1">
+        </a>
+        -->
+        
+        <!-- ===============================
+             SECONDA “METÀ” DEI LOGHI (DUPLICA TUTTE LE RIGHE SOPRA)
+             Serve per garantire lo scorrimento continuo senza interruzioni.
+             =============================== -->
+        <a href="https://www.casarpege.it/" target="_blank" rel="noopener noreferrer">
+          <img src="logo.png" alt="Logo Arpeggiatori">
+        </a>
+        <a href="https://www.estetica.it/" target="_blank" rel="noopener noreferrer">
+          <img src="estetica.png" alt="Logo Estetica">
+        </a>
+        <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank" rel="noopener noreferrer">
+          <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere">
+        </a>
+        <a href="https://www.dyson.it/it" target="_blank" rel="noopener noreferrer">
+          <img src="dyson.png" alt="Logo Dyson">
+        </a>
+        <a href="https://www.emsibeth.it/" target="_blank" rel="noopener noreferrer">
+          <img src="emsibeth.png" alt="Logo Emsibeth">
+        </a>
+        
+        <!-- Duplica qui eventuali nuovi loghi aggiunti sopra:
+        <a href="https://url-nuovo-partner.it" target="_blank" rel="noopener noreferrer">
+          <img src="altro-logo1.png" alt="Altro Logo 1">
+        </a>
+        -->
+      </div>
     </div>
-  </div>
+  </div> <!-- /.main-wrapper -->
 
   <!-- Script per il toggle audio e il preloader -->
   <script>
@@ -274,6 +302,7 @@
   </script>
 </body>
 </html>
+
 
 
 
