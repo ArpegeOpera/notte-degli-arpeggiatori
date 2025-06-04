@@ -248,17 +248,16 @@
   <script>
     const audio = document.getElementById('bg-music');
     const toggleBtn = document.getElementById('audio-toggle');
-    let playing = false;
 
+    // Usa lo stato reale dell'audio per determinare se riprodurre o mettere in pausa
     function toggleAudio() {
-      if (playing) {
-        audio.pause();
-        toggleBtn.textContent = '🔈';
-      } else {
+      if (audio.paused) {
         audio.play();
         toggleBtn.textContent = '🔊';
+      } else {
+        audio.pause();
+        toggleBtn.textContent = '🔈';
       }
-      playing = !playing;
     }
 
     window.addEventListener("load", function () {
