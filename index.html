@@ -286,7 +286,8 @@
       }
     }
 
-    window.addEventListener("load", function () {
+    // Appena il DOM è pronto, avviamo il timer del preloader
+    window.addEventListener("DOMContentLoaded", function () {
       const preloader = document.getElementById("preloader");
 
       // 3 secondi di tempo visibile al preloader, poi dissolve
