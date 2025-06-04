@@ -138,6 +138,12 @@
       white-space: nowrap;      /* Tutti i loghi in un’unica riga, senza andare a capo */
       animation: scroll-logos 25s linear infinite; /* Durata animazione: 25s, puoi modificarla */
     }
+    #logo-marquee-wrapper:hover #logo-marquee {
+      animation-play-state: paused; /* Ferma lo scorrimento quando passi il mouse sopra */
+    }
+    #logo-marquee a {
+      display: inline-block;    /* Migliora l'area cliccabile dei loghi */
+    }
 
     #logo-marquee img {
       vertical-align: middle;
