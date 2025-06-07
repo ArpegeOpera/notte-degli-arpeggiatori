@@ -188,10 +188,10 @@
   </div>
 
   <!-- Pulsante per attivare/disattivare audio -->
-  <button id="audio-toggle" onclick="toggleAudio()">🔈</button>
+  <button id="audio-toggle" onclick="toggleAudio()">🔊</button>
 
   <!-- Audio in background -->
-  <audio id="bg-music" loop>
+  <audio id="bg-music" loop autoplay preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
@@ -285,6 +285,13 @@
         toggleBtn.textContent = '🔈';
       }
     }
+
+    // Tenta subito di avviare la musica
+    audio.play().then(() => {
+      toggleBtn.textContent = '🔊';
+    }).catch(() => {
+      // Autoplay potrebbe essere bloccato dal browser
+    });
 
     // Appena il DOM è pronto, avviamo il timer del preloader
     window.addEventListener("DOMContentLoaded", function () {
