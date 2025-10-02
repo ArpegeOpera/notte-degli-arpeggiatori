@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La Notte degli Arpeggiatori - Evento speciale con programma domenica e lunedì" />
+  <meta name="keywords" content="arpeggiatori, evento, programma, domenica, lunedì" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
@@ -47,6 +49,20 @@
     /* =============================
        STRUTTURA PRINCIPALE DELLA PAGINA
        ============================= */
+    .logo-container {
+      position: fixed;
+      top: 15vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      z-index: 10;
+    }
+    .logo-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
     .container {
       display: flex;
       flex-direction: column;
@@ -54,16 +70,6 @@
       justify-content: center;
       height: 100%;
       padding: 5vh 5vw;
-    }
-    .title {
-      width: 90%;
-      max-width: 400px;
-      margin-bottom: 8vh;
-    }
-    .title img {
-      width: 100%;
-      height: auto;
-      display: block;
     }
     .buttons {
       width: 100%;
@@ -157,23 +163,25 @@
   </div>
 
   <!-- Pulsante per attivare/disattivare audio -->
-  <button id="audio-toggle" onclick="toggleAudio()">🔊</button>
+  <button id="audio-toggle" onclick="toggleAudio()" aria-label="Attiva/Disattiva audio" title="Attiva/Disattiva audio">🔊</button>
 
   <!-- Audio in background -->
   <audio id="bg-music" loop autoplay playsinline preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Contenuto principale: titolo e pulsanti -->
+  <!-- Logo fisso in alto -->
+  <div class="logo-container">
+    <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+  </div>
+
+  <!-- Contenuto principale: pulsanti -->
   <div class="container">
-    <div class="title">
-      <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+    <div class="buttons">
+      <a href="programma_domenica.jpg" class="btn" target="_blank" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
+      <a href="programma_lunedì.jpg" class="btn" target="_blank" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
+      <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
     </div>
-      <div class="buttons">
-        <a href="domenica_programma.jpg" class="btn" target="_blank">PROGRAMMA DOMENICA</a>
-        <a href="lunedì_programma.mp4" class="btn" target="_blank">PROGRAMMA LUNEDÌ</a>
-        <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn">NOTIFICHE LIVE</a>
-      </div>
   </div>
 
   <!-- Banda di loghi scorrevvoli -->
