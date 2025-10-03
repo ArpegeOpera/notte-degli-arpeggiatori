@@ -42,7 +42,6 @@
       width: 180px;
       animation: fadeIn 1.5s ease;
     }
-
     .logo-container {
       position: fixed;
       top: 15vh;
@@ -51,11 +50,33 @@
       width: 90%;
       max-width: 400px;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .logo-container img {
       width: 100%;
       height: auto;
       display: block;
+    }
+    /* Pulsante audio sotto il logo, centrato */
+    #audio-toggle {
+      margin-top: 1.5vh;
+      font-size: 1.5rem;
+      background: rgba(0,0,0,0.13);
+      border: none;
+      border-radius: 50%;
+      padding: 0.15em 0.15em;
+      color: white;
+      cursor: pointer;
+      z-index: 1002;
+      opacity: 0.93;
+      transition: transform 0.1s, opacity 0.1s;
+      display: block;
+    }
+    #audio-toggle:hover {
+      transform: scale(1.15);
+      opacity: 1;
     }
     .container {
       display: flex;
@@ -91,29 +112,6 @@
       transform: scale(1.05);
       box-shadow: 0 0 10px gold;
     }
-
-    /* AUDIO ICONA CENTRATA SOPRA IL LOGO */
-    #audio-toggle {
-      position: absolute;
-      left: 50%;
-      top: 4vh;
-      transform: translateX(-50%);
-      font-size: 2.4rem;
-      background: rgba(0,0,0,0.15);
-      border: none;
-      border-radius: 50%;
-      padding: 0.33em 0.38em;
-      color: white;
-      cursor: pointer;
-      z-index: 1002;
-      opacity: 0.95;
-      transition: transform 0.1s, opacity 0.1s;
-    }
-    #audio-toggle:hover {
-      transform: translateX(-50%) scale(1.18);
-      opacity: 1;
-    }
-
     #logo-marquee-wrapper {
       position: fixed;
       bottom: 0;
@@ -149,6 +147,8 @@
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
       #logo-marquee img  { max-height: 90px; margin: 0 20px; }
+      .logo-container { top: 8vh; max-width: 98vw; }
+      #audio-toggle { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -159,18 +159,16 @@
     <img src="NDA_TITOLO.png" alt="Logo" />
   </div>
 
-  <!-- Pulsante per attivare/disattivare audio, ora centrato sopra il logo -->
-  <button id="audio-toggle" onclick="toggleAudio()" aria-label="Attiva/Disattiva audio" title="Attiva/Disattiva audio">🔊</button>
+  <!-- Logo fisso in alto con pulsante audio subito sotto -->
+  <div class="logo-container">
+    <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
+    <button id="audio-toggle" onclick="toggleAudio()" aria-label="Attiva/Disattiva audio" title="Attiva/Disattiva audio">🔊</button>
+  </div>
 
   <!-- Audio in background -->
   <audio id="bg-music" loop autoplay playsinline preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
-
-  <!-- Logo fisso in alto -->
-  <div class="logo-container">
-    <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
-  </div>
 
   <!-- Contenuto principale: pulsanti -->
   <div class="container">
