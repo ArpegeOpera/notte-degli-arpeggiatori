@@ -8,9 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
-    /* =============================
-       STILI GENERALI E PRELOADER
-       ============================= */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -46,9 +43,6 @@
       animation: fadeIn 1.5s ease;
     }
 
-    /* =============================
-       STRUTTURA PRINCIPALE DELLA PAGINA
-       ============================= */
     .logo-container {
       position: fixed;
       top: 15vh;
@@ -97,27 +91,29 @@
       transform: scale(1.05);
       box-shadow: 0 0 10px gold;
     }
+
+    /* AUDIO ICONA CENTRATA SOPRA IL LOGO */
     #audio-toggle {
-      position: fixed;
-      top: 2vh;
-      right: 2vw;
-      font-size: 1.8rem;
-      background: transparent;
+      position: absolute;
+      left: 50%;
+      top: 4vh;
+      transform: translateX(-50%);
+      font-size: 2.4rem;
+      background: rgba(0,0,0,0.15);
       border: none;
+      border-radius: 50%;
+      padding: 0.33em 0.38em;
       color: white;
       cursor: pointer;
-      z-index: 999;
-      opacity: 0.9;
-      transition: transform 0.1s;
+      z-index: 1002;
+      opacity: 0.95;
+      transition: transform 0.1s, opacity 0.1s;
     }
     #audio-toggle:hover {
-      transform: scale(1.2);
+      transform: translateX(-50%) scale(1.18);
       opacity: 1;
     }
 
-    /* =============================
-       BANDA ORIZZONTALE SCORREVOLE (MARQUEE) – LOGHI
-       ============================= */
     #logo-marquee-wrapper {
       position: fixed;
       bottom: 0;
@@ -163,7 +159,7 @@
     <img src="NDA_TITOLO.png" alt="Logo" />
   </div>
 
-  <!-- Pulsante per attivare/disattivare audio -->
+  <!-- Pulsante per attivare/disattivare audio, ora centrato sopra il logo -->
   <button id="audio-toggle" onclick="toggleAudio()" aria-label="Attiva/Disattiva audio" title="Attiva/Disattiva audio">🔊</button>
 
   <!-- Audio in background -->
@@ -261,6 +257,7 @@
   </script>
 </body>
 </html>
+
 
 
 
