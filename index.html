@@ -249,21 +249,23 @@
     }
 
     window.addEventListener("DOMContentLoaded", function () {
-      const preloader = document.getElementById("preloader");
-      if (preloader) {
-        setTimeout(() => {
-          preloader.style.opacity = "0";
-          setTimeout(() => preloader.style.display = "none", 2000);
-        }, 3000);
-      }
-      // Comparsa pulsante "SCOPRI IL TUO TAVOLO" alle 18.00 del 19/10/2025
-      const btnScopri = document.getElementById("btn-scopri-tavolo");
-      const unlockDate = new Date(2025, 9, 18, 16, 10, 0); // ottobre = 9 (zero-based)
-      const now = new Date();
-      if (now >= unlockDate) {
-        btnScopri.style.display = '';
-      }
-    });
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    setTimeout(() => {
+      preloader.style.opacity = "0";
+      setTimeout(() => preloader.style.display = "none", 2000);
+    }, 3000);
+  }
+
+  // --- TEST: comparsa il 18 ottobre 2025 alle 16:10 ---
+  const btnScopri = document.getElementById("btn-scopri-tavolo");
+  const unlockDate = new Date(2025, 9, 18, 16, 10, 0); // Ottobre = 9
+  const now = new Date();
+  if (now >= unlockDate) {
+    btnScopri.style.display = '';
+  }
+});
+
   </script>
 </body>
 </html>
