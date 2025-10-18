@@ -179,7 +179,7 @@
       <a href="programma_domenica.jpg" class="btn" target="_blank" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
       <a href="programma_lunedì.jpg" class="btn" target="_blank" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
       <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
-      <a href="https://trova-il-tavolo.lovable.app/" class="btn" id="btn-scopri-tavolo" target="_blank" aria-label="Scopri il tuo tavolo">SCOPRI IL TUO TAVOLO</a>
+      <a href="https://trova-il-tavolo.lovable.app/" class="btn" id="btn-scopri-tavolo" target="_blank" style="display:none;" aria-label="Scopri il tuo tavolo">SCOPRI IL TUO TAVOLO</a>
     </div>
   </div>
 
@@ -258,14 +258,19 @@
   }
 
   // --- TEST: comparsa il 18 ottobre 2025 alle 16:10 ---
+  const unlockDate = new Date(2025, 9, 18, 17, 00, 0); // Ottobre = 9
   const btnScopri = document.getElementById("btn-scopri-tavolo");
-  const unlockDate = new Date(2025, 9, 18, 16, 30, 0); // Ottobre = 9
-  const now = new Date();
-  if (now >= unlockDate) {
-    btnScopri.style.display = '';
+  function checkBtn() {
+    const now = new Date();
+    if (now >= unlockDate) {
+      btnScopri.style.display = '';
+    } else {
+      btnScopri.style.display = 'none';
+      setTimeout(checkBtn, 1000); // ricontrolla ogni secondo
+    }
   }
+  checkBtn();
 });
-
   </script>
 </body>
 </html>
