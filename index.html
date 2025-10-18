@@ -8,15 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
     }
+
     html, body {
       height: 100%;
       font-family: 'Montserrat', sans-serif;
@@ -26,6 +24,7 @@
       overflow: hidden;
       overscroll-behavior: none;
     }
+
     #preloader {
       position: fixed;
       top: 0; left: 0;
@@ -60,6 +59,7 @@
       height: auto;
       display: block;
     }
+
     #audio-toggle {
       margin-top: 1.5vh;
       font-size: 2.0rem;
@@ -78,6 +78,7 @@
       transform: scale(1.15);
       opacity: 1;
     }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -86,6 +87,7 @@
       height: 100%;
       padding: 5vh 5vw;
     }
+
     .buttons {
       width: 100%;
       max-width: 400px;
@@ -94,6 +96,7 @@
       gap: 2.5vh;
       margin-top: 23vh; /* Aumentato lo spazio per NON coprire l’audio! */
     }
+
     .btn {
       width: 100%;
       padding: 1rem 1.5rem;
@@ -112,6 +115,7 @@
       transform: scale(1.05);
       box-shadow: 0 0 10px gold;
     }
+
     #logo-marquee-wrapper {
       position: fixed;
       bottom: 0;
@@ -140,10 +144,12 @@
       margin: 0 30px;
       opacity: 0.9;
     }
+
     @keyframes scroll-logos {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
       #logo-marquee img  { max-height: 90px; margin: 0 20px; }
@@ -152,10 +158,16 @@
       .btn { font-size: 1.08rem; }
       .buttons { margin-top: 20vh; } /* Spazio aumentato su mobile */
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      #logo-marquee { animation: none; }
+      #preloader { transition: none; }
+    }
+
     #btn-scopri-tavolo { margin-bottom: 3vh; }
   </style>
 </head>
-<body onload="startMusic()">
+<body>
 
   <!-- Preloader -->
   <div id="preloader">
@@ -165,126 +177,135 @@
   <!-- Logo fisso in alto con pulsante audio subito sotto -->
   <div class="logo-container">
     <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
-    <button id="audio-toggle" onclick="toggleAudio()" aria-label="Attiva/Disattiva audio" title="Attiva/Disattiva audio">🔊</button>
+    <button
+      id="audio-toggle"
+      onclick="toggleAudio()"
+      aria-label="Attiva/Disattiva audio"
+      aria-pressed="false"
+      title="Attiva/Disattiva audio">🔊</button>
   </div>
 
   <!-- Audio in background -->
-  <audio id="bg-music" loop autoplay playsinline preload="auto">
+  <audio id="bg-music" loop autoplay playsinline preload="auto" muted>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Contenuto principale: pulsanti -->
   <div class="container">
     <div class="buttons">
-      <a href="programma_domenica.jpg" class="btn" target="_blank" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
-      <a href="programma_lunedì.jpg" class="btn" target="_blank" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
-      <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
-      <a href="https://trova-il-tavolo.lovable.app/" class="btn" id="btn-scopri-tavolo" target="_blank" style="display:none;" aria-label="Scopri il tuo tavolo">SCOPRI IL TUO TAVOLO</a>
+      <a href="programma_domenica.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
+      <a href="programma_lunedì.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
+      <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
+      <a href="https://trova-il-tavolo.lovable.app/" class="btn" id="btn-scopri-tavolo" target="_blank" rel="noopener noreferrer" style="display:none;" aria-label="Scopri il tuo tavolo">SCOPRI IL TUO TAVOLO</a>
     </div>
   </div>
 
-  <!-- Banda di loghi scorrevvoli -->
+  <!-- Banda di loghi scorrevoli -->
   <div id="logo-marquee-wrapper">
     <div id="logo-marquee">
-      <a href="https://www.casarpege.it/" target="_blank">
+      <a href="https://www.casarpege.it/" target="_blank" rel="noopener noreferrer">
         <img src="logo.png" alt="Logo Arpeggiatori">
       </a>
-      <a href="https://www.estetica.it/" target="_blank">
+      <a href="https://www.estetica.it/" target="_blank" rel="noopener noreferrer">
         <img src="estetica.png" alt="Logo Estetica">
       </a>
-      <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank">
+      <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank" rel="noopener noreferrer">
         <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
       </a>
-      <a href="https://www.dyson.it/cura-dei-capelli" target="_blank">
+      <a href="https://www.dyson.it/cura-dei-capelli" target="_blank" rel="noopener noreferrer">
         <img src="dyson.png" alt="Logo Dyson">
       </a>
-      <a href="https://www.emsibeth.it/" target="_blank">
+      <a href="https://www.emsibeth.it/" target="_blank" rel="noopener noreferrer">
         <img src="emsibeth.png" alt="Logo Emsibeth">
       </a>
-      <a href="https://mbacademy.it/" target="_blank">
+      <a href="https://mbacademy.it/" target="_blank" rel="noopener noreferrer">
         <img src="mba.png" alt="Logo MBA">
       </a>
-      <a href="https://www.casarpege.it/" target="_blank">
+      <a href="https://www.casarpege.it/" target="_blank" rel="noopener noreferrer">
         <img src="logo.png" alt="Logo Arpeggiatori">
       </a>
-      <a href="https://www.estetica.it/" target="_blank">
+      <a href="https://www.estetica.it/" target="_blank" rel="noopener noreferrer">
         <img src="estetica.png" alt="Logo Estetica">
       </a>
-      <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank">
+      <a href="https://parrucchiereorganizzato.mykajabi.com/" target="_blank" rel="noopener noreferrer">
         <img src="parrucchiere_organizzato.png" alt="Logo Parrucchiere Organizzato">
       </a>
-      <a href="https://www.dyson.it/cura-dei-capelli" target="_blank">
+      <a href="https://www.dyson.it/cura-dei-capelli" target="_blank" rel="noopener noreferrer">
         <img src="dyson.png" alt="Logo Dyson">
       </a>
-      <a href="https://www.emsibeth.it/" target="_blank">
+      <a href="https://www.emsibeth.it/" target="_blank" rel="noopener noreferrer">
         <img src="emsibeth.png" alt="Logo Emsibeth">
       </a>
-      <a href="https://mbacademy.it/" target="_blank">
+      <a href="https://mbacademy.it/" target="_blank" rel="noopener noreferrer">
         <img src="mba.png" alt="Logo MBA">
       </a>
     </div>
   </div>
 
-  <!-- Script per il toggle audio e preloader -->
+  <!-- Script -->
   <script>
-    const audio = document.getElementById('bg-music');
-    const toggleBtn = document.getElementById('audio-toggle');
-
-    function startMusic() {
-      audio.play()
-        .then(() => { toggleBtn.textContent = '🔊'; })
-        .catch(() => {
-          // Autoplay bloccato: resta silenzioso finché l'utente non clicca
-        });
-    }
+    let audio, toggleBtn;
 
     function toggleAudio() {
+      if (!audio || !toggleBtn) return;
       if (audio.paused) {
-        audio.play();
+        // Se era mutato (autoplay su mobile), smuta al primo click
+        if (audio.muted) audio.muted = false;
+        audio.play().catch(() => {});
         toggleBtn.textContent = '🔊';
+        toggleBtn.setAttribute('aria-pressed', 'true');
       } else {
         audio.pause();
         toggleBtn.textContent = '🔈';
+        toggleBtn.setAttribute('aria-pressed', 'false');
       }
     }
 
     window.addEventListener("DOMContentLoaded", function () {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    setTimeout(() => {
-      preloader.style.opacity = "0";
-      setTimeout(() => preloader.style.display = "none", 2000);
-    }, 3000);
-  }
+      // riferimenti
+      audio = document.getElementById('bg-music');
+      toggleBtn = document.getElementById('audio-toggle');
 
-  // --- TEST: comparsa il 18 ottobre 2025 alle 16:10 ---
-  window.addEventListener("DOMContentLoaded", function () {
-  const btnScopri = document.getElementById("btn-scopri-tavolo");
-  if(!btnScopri) {
-    alert('Bottone non trovato!');
-    return;
-  }
+      // prova a partire (potrebbe rimanere muto finché non si clicca)
+      if (audio) {
+        audio.play().then(() => {
+          // se parte in mute, il toggle resta "attivo" ma silenzioso
+          toggleBtn && toggleBtn.setAttribute('aria-pressed', audio.paused ? 'false' : 'true');
+        }).catch(() => {});
+      }
 
-  // Cambia ORARIO qui: esempio, oggi alle 17:10 (24h)
-  const unlockDate = new Date(2025, 9, 18, 17, 10, 0); // mese 9=ottobre
+      // Preloader
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        setTimeout(() => {
+          preloader.style.opacity = "0";
+          setTimeout(() => preloader.style.display = "none", 2000);
+        }, 3000);
+      }
 
-  function checkBtn() {
-    const now = new Date();
-    // DEBUG: mostra orari
-    // btnScopri.textContent = 'DEBUG:' + now.toLocaleString() + ' > ' + unlockDate.toLocaleString();
-
-    if (now >= unlockDate) {
-      btnScopri.style.display = '';
-    } else {
-      btnScopri.style.display = 'none';
-      setTimeout(checkBtn, 1000);
-    }
-  }
-  checkBtn();
-});
+      // --- Sblocco "SCOPRI IL TUO TAVOLO" ---
+      // TEST: comparsa il 18 ottobre 2025 alle 17:10
+      const btnScopri = document.getElementById("btn-scopri-tavolo");
+      if (btnScopri) {
+        const unlockDate = new Date(2025, 9, 18, 17, 10, 0); // mese 9=ottobre
+        function checkBtn() {
+          const now = new Date();
+          if (now >= unlockDate) {
+            btnScopri.style.display = '';
+          } else {
+            btnScopri.style.display = 'none';
+            setTimeout(checkBtn, 1000);
+          }
+        }
+        checkBtn();
+      } else {
+        console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.');
+      }
+    });
   </script>
 </body>
 </html>
+
 
 
 
