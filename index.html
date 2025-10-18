@@ -59,7 +59,6 @@
       height: auto;
       display: block;
     }
-    /* Pulsante audio sotto il logo, centrato */
     #audio-toggle {
       margin-top: 1.5vh;
       font-size: 2.0rem;
@@ -149,7 +148,10 @@
       #logo-marquee img  { max-height: 90px; margin: 0 20px; }
       .logo-container { top: 8vh; max-width: 98vw; }
       #audio-toggle { font-size: 2.0rem; }
+      .btn { font-size: 1.08rem; }
     }
+    /* Margine extra sotto per il pulsante speciale su mobile */
+    #btn-scopri-tavolo { margin-bottom: 3vh; }
   </style>
 </head>
 <body onload="startMusic()">
@@ -176,6 +178,8 @@
       <a href="programma_domenica.jpg" class="btn" target="_blank" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
       <a href="programma_lunedì.jpg" class="btn" target="_blank" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
       <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
+      <!-- Nuovo pulsante in fondo -->
+      <a href="https://find-my-seat-pro.lovable.app/" class="btn" id="btn-scopri-tavolo" target="_blank" aria-label="Scopri il tuo tavolo" style="display:none;">SCOPRI IL TUO TAVOLO</a>
     </div>
   </div>
 
@@ -222,7 +226,7 @@
     </div>
   </div>
 
-  <!-- Script per il toggle audio e il preloader -->
+  <!-- Script per il toggle audio, preloader e pulsante speciale -->
   <script>
     const audio = document.getElementById('bg-music');
     const toggleBtn = document.getElementById('audio-toggle');
@@ -246,15 +250,26 @@
     }
 
     window.addEventListener("DOMContentLoaded", function () {
+      // Preloader
       const preloader = document.getElementById("preloader");
-      setTimeout(() => {
-        preloader.style.opacity = "0";
-        setTimeout(() => preloader.style.display = "none", 2000);
-      }, 3000);
+      if (preloader) {
+        setTimeout(() => {
+          preloader.style.opacity = "0";
+          setTimeout(() => preloader.style.display = "none", 2000);
+        }, 3000);
+      }
+      // Pulsante speciale visibile solo dalle 18 del 19/10/2025
+      // TEST: pulsante sempre visibile
+    window.addEventListener("DOMContentLoaded", function () {
+      const btnScopri = document.getElementById("btn-scopri-tavolo");
+      btnScopri.style.display = '';
+    });
+
     });
   </script>
 </body>
 </html>
+
 
 
 
