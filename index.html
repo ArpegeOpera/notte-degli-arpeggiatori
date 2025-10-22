@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="La Notte degli Arpeggiatori - Evento concluso" />
   <meta name="keywords" content="arpeggiatori, eventi, grazie, sponsor" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Montserrat + Great Vibes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,32 +81,42 @@
     }
 
     .container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100%;
-      padding: 5vh 5vw;
     }
 
-    /* Riquadro di ringraziamento con lo stile pulsante */
+    /* Riquadro di ringraziamento con stile bottoni, centrato meglio e font speciale */
     .grazie-box {
-      width: 100%;
-      max-width: 400px;
+      width: 94vw;
+      max-width: 410px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-      background: rgba(153, 0, 0, 0.90);
-      color: white;
-      font-size: 1.13rem;
-      font-weight: bold;
+      padding: 2.8rem 1.3rem;
+      background: rgba(153, 0, 0, 0.94);
+      color: #fffbea;
+      font-size: 2.05rem;
+      font-family: 'Great Vibes', cursive, 'Montserrat', sans-serif;
+      font-weight: 400;
       border: 4px solid gold;
-      border-radius: 2rem;
+      border-radius: 2.1rem;
       text-align: center;
-      box-shadow: 0 0 14px #ffd70040;
-      margin-top: 25vh;
-      letter-spacing: 0.04em;
-      line-height: 1.6;
+      box-shadow: 0 0 22px #ffd70070, 0 0 8px #900;
+      letter-spacing: 0.018em;
+      line-height: 1.35;
       animation: fadeIn 1.5s;
+      text-shadow: 0 3px 14px #330700, 0 0 3px #fff7;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+      /* sempre sopra, non cliccabile */
     }
 
     #logo-marquee-wrapper {
@@ -144,10 +155,10 @@
 
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
-      #logo-marquee img  { max-height: 90px; margin: 0 20px; }
+      #logo-marquee img  { max-height: 90px; margin: 0 14px; }
       .logo-container { top: 7vh; max-width: 98vw; }
       #audio-toggle { font-size: 2.0rem; }
-      .grazie-box { font-size: 1.03rem; margin-top: 22vh; }
+      .grazie-box { font-size: 1.39rem; padding: 1.5rem 0.7rem;}
     }
   </style>
 </head>
