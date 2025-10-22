@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="La Notte degli Arpeggiatori - Evento speciale con programma domenica e lunedì" />
-  <meta name="keywords" content="arpeggiatori, evento, programma, domenica, lunedì" />
+  <meta name="description" content="La Notte degli Arpeggiatori - Evento concluso" />
+  <meta name="keywords" content="arpeggiatori, eventi, grazie, sponsor" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
@@ -44,7 +44,7 @@
 
     .logo-container {
       position: fixed;
-      top: 12vh; /* Abbassato di 3vh rispetto a 15vh */
+      top: 12vh;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -88,32 +88,24 @@
       padding: 5vh 5vw;
     }
 
-    .buttons {
+    /* Riquadro di ringraziamento con lo stile pulsante */
+    .grazie-box {
       width: 100%;
       max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      gap: 2.5vh;
-      margin-top: 23vh; /* Aumentato lo spazio per NON coprire l’audio! */
-    }
-
-    .btn {
-      width: 100%;
-      padding: 1rem 1.5rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
       background: rgba(153, 0, 0, 0.90);
       color: white;
-      font-size: 1rem;
+      font-size: 1.13rem;
       font-weight: bold;
       border: 4px solid gold;
       border-radius: 2rem;
       text-align: center;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .btn:hover,
-    .btn:active {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px gold;
+      box-shadow: 0 0 14px #ffd70040;
+      margin-top: 25vh;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      animation: fadeIn 1.5s;
     }
 
     #logo-marquee-wrapper {
@@ -153,18 +145,10 @@
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
       #logo-marquee img  { max-height: 90px; margin: 0 20px; }
-      .logo-container { top: 7vh; max-width: 98vw; } /* Abbassato su mobile per più spazio */
+      .logo-container { top: 7vh; max-width: 98vw; }
       #audio-toggle { font-size: 2.0rem; }
-      .btn { font-size: 1.08rem; }
-      .buttons { margin-top: 20vh; } /* Spazio aumentato su mobile */
+      .grazie-box { font-size: 1.03rem; margin-top: 22vh; }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      #logo-marquee { animation: none; }
-      #preloader { transition: none; }
-    }
-
-    #btn-scopri-tavolo { margin-bottom: 3vh; }
   </style>
 </head>
 <body>
@@ -190,13 +174,11 @@
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Contenuto principale: pulsanti -->
+  <!-- Contenuto principale: solo il riquadro di ringraziamento -->
   <div class="container">
-    <div class="buttons">
-      <a href="programma_domenica.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
-      <a href="programma_lunedì.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
-      <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
-      <a href="https://info-notte.lovable.app/transfer" class="btn" id="btn-scopri-tavolo" target="_blank" rel="noopener noreferrer" style="display:none;" aria-label="Scopri il tuo tavolo">INFO TRANSFER</a>
+    <div class="grazie-box">
+      Grazie di cuore a tutti quanti,<br>
+      siete tutti l'ottava nota che si aggiunge all'armonia perfetta
     </div>
   </div>
 
@@ -249,7 +231,6 @@
     function toggleAudio() {
       if (!audio || !toggleBtn) return;
       if (audio.paused) {
-        // Se era mutato (autoplay su mobile), smuta al primo click
         if (audio.muted) audio.muted = false;
         audio.play().catch(() => {});
         toggleBtn.textContent = '🔊';
@@ -262,19 +243,13 @@
     }
 
     window.addEventListener("DOMContentLoaded", function () {
-      // riferimenti
       audio = document.getElementById('bg-music');
       toggleBtn = document.getElementById('audio-toggle');
-
-      // prova a partire (potrebbe rimanere muto finché non si clicca)
       if (audio) {
         audio.play().then(() => {
-          // se parte in mute, il toggle resta "attivo" ma silenzioso
           toggleBtn && toggleBtn.setAttribute('aria-pressed', audio.paused ? 'false' : 'true');
         }).catch(() => {});
       }
-
-      // Preloader
       const preloader = document.getElementById("preloader");
       if (preloader) {
         setTimeout(() => {
@@ -282,29 +257,11 @@
           setTimeout(() => preloader.style.display = "none", 2000);
         }, 3000);
       }
-
-      // --- Sblocco "SCOPRI IL TUO TAVOLO" ---
-      // TEST: comparsa il 18 ottobre 2025 alle 17:10
-      const btnScopri = document.getElementById("btn-scopri-tavolo");
-      if (btnScopri) {
-        const unlockDate = new Date(2025, 9, 19, 18, 0, 0); // mese 9=ottobre
-        function checkBtn() {
-          const now = new Date();
-          if (now >= unlockDate) {
-            btnScopri.style.display = '';
-          } else {
-            btnScopri.style.display = 'none';
-            setTimeout(checkBtn, 1000);
-          }
-        }
-        checkBtn();
-      } else {
-        console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.');
-      }
     });
   </script>
 </body>
 </html>
+
 
 
 
