@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="La Notte degli Arpeggiatori - Evento concluso" />
-  <meta name="keywords" content="arpeggiatori, eventi, grazie, sponsor" />
-  <!-- Font Montserrat + Great Vibes -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="description" content="La Notte degli Arpeggiatori - Evento speciale con programma domenica e lunedì" />
+  <meta name="keywords" content="arpeggiatori, evento, programma, domenica, lunedì" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +44,7 @@
 
     .logo-container {
       position: fixed;
-      top: 12vh;
+      top: 12vh; /* Abbassato di 3vh rispetto a 15vh */
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -81,42 +80,40 @@
     }
 
     .container {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 100%;
+      padding: 5vh 5vw;
     }
 
-    /* Riquadro di ringraziamento con stile bottoni, centrato meglio e font speciale */
-    .grazie-box {
-      width: 94vw;
-      max-width: 410px;
-      margin: 0 auto;
-      padding: 2.8rem 1.3rem;
-      background: rgba(153, 0, 0, 0.94);
-      color: #fffbea;
-      font-size: 2.05rem;
-      font-family: 'Great Vibes', cursive, 'Montserrat', sans-serif;
-      font-weight: 400;
+    .buttons {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5vh;
+      margin-top: 23vh; /* Aumentato lo spazio per NON coprire l’audio! */
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: rgba(153, 0, 0, 0.90);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
       border: 4px solid gold;
-      border-radius: 2.1rem;
+      border-radius: 2rem;
       text-align: center;
-      box-shadow: 0 0 22px #ffd70070, 0 0 8px #900;
-      letter-spacing: 0.018em;
-      line-height: 1.35;
-      animation: fadeIn 1.5s;
-      text-shadow: 0 3px 14px #330700, 0 0 3px #fff7;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-      z-index: 100;
-      user-select: none;
-      pointer-events: none;
-      /* sempre sopra, non cliccabile */
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover,
+    .btn:active {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px gold;
     }
 
     #logo-marquee-wrapper {
@@ -155,11 +152,19 @@
 
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
-      #logo-marquee img  { max-height: 90px; margin: 0 14px; }
-      .logo-container { top: 7vh; max-width: 98vw; }
+      #logo-marquee img  { max-height: 90px; margin: 0 20px; }
+      .logo-container { top: 7vh; max-width: 98vw; } /* Abbassato su mobile per più spazio */
       #audio-toggle { font-size: 2.0rem; }
-      .grazie-box { font-size: 1.39rem; padding: 1.5rem 0.7rem;}
+      .btn { font-size: 1.08rem; }
+      .buttons { margin-top: 20vh; } /* Spazio aumentato su mobile */
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      #logo-marquee { animation: none; }
+      #preloader { transition: none; }
+    }
+
+    #btn-scopri-tavolo { margin-bottom: 3vh; }
   </style>
 </head>
 <body>
@@ -185,11 +190,13 @@
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Contenuto principale: solo il riquadro di ringraziamento -->
+  <!-- Contenuto principale: pulsanti -->
   <div class="container">
-    <div class="grazie-box">
-      Grazie di cuore a tutti quanti,<br>
-      siete tutti l'ottava nota che si aggiunge all'armonia perfetta
+    <div class="buttons">
+      <a href="programma_domenica.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma domenica">PROGRAMMA DOMENICA</a>
+      <a href="programma_lunedì.jpg" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma lunedì">PROGRAMMA LUNEDÌ</a>
+      <a href="https://chat.whatsapp.com/LNG4KZS5JVy5d2912WtyEY?mode=ems_wa_t" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri notifiche live su WhatsApp">NOTIFICHE LIVE</a>
+      <a href="https://info-notte.lovable.app/transfer" class="btn" id="btn-scopri-tavolo" target="_blank" rel="noopener noreferrer" style="display:none;" aria-label="Scopri il tuo tavolo">INFO TRANSFER</a>
     </div>
   </div>
 
@@ -242,6 +249,7 @@
     function toggleAudio() {
       if (!audio || !toggleBtn) return;
       if (audio.paused) {
+        // Se era mutato (autoplay su mobile), smuta al primo click
         if (audio.muted) audio.muted = false;
         audio.play().catch(() => {});
         toggleBtn.textContent = '🔊';
@@ -254,13 +262,19 @@
     }
 
     window.addEventListener("DOMContentLoaded", function () {
+      // riferimenti
       audio = document.getElementById('bg-music');
       toggleBtn = document.getElementById('audio-toggle');
+
+      // prova a partire (potrebbe rimanere muto finché non si clicca)
       if (audio) {
         audio.play().then(() => {
+          // se parte in mute, il toggle resta "attivo" ma silenzioso
           toggleBtn && toggleBtn.setAttribute('aria-pressed', audio.paused ? 'false' : 'true');
         }).catch(() => {});
       }
+
+      // Preloader
       const preloader = document.getElementById("preloader");
       if (preloader) {
         setTimeout(() => {
@@ -268,20 +282,26 @@
           setTimeout(() => preloader.style.display = "none", 2000);
         }, 3000);
       }
+
+      // --- Sblocco "SCOPRI IL TUO TAVOLO" ---
+      // TEST: comparsa il 18 ottobre 2025 alle 17:10
+      const btnScopri = document.getElementById("btn-scopri-tavolo");
+      if (btnScopri) {
+        const unlockDate = new Date(2025, 9, 19, 18, 0, 0); // mese 9=ottobre
+        function checkBtn() {
+          const now = new Date();
+          if (now >= unlockDate) {
+            btnScopri.style.display = '';
+          } else {
+            btnScopri.style.display = 'none';
+            setTimeout(checkBtn, 1000);
+          }
+        }
+        checkBtn();
+      } else {
+        console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.');
+      }
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
