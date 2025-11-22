@@ -44,7 +44,7 @@
 
     .logo-container {
       position: fixed;
-      top: 12vh; /* Abbassato di 3vh rispetto a 15vh */
+      top: 12vh; 
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -94,7 +94,19 @@
       display: flex;
       flex-direction: column;
       gap: 2.5vh;
-      margin-top: 23vh; /* Aumentato lo spazio per NON coprire l’audio! */
+      margin-top: 23vh; 
+    }
+
+    /* --- NUOVO STILE PER IL TITOLO --- */
+    .section-title {
+      color: #fff;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ombra per contrasto sfondo */
+      margin-bottom: 0.5vh; /* Spazio tra titolo e primo pulsante */
+      letter-spacing: 1px;
     }
 
     .btn {
@@ -153,10 +165,11 @@
     @media (max-width: 480px) {
       #logo-marquee-wrapper { padding: 5px 0; }
       #logo-marquee img  { max-height: 90px; margin: 0 20px; }
-      .logo-container { top: 7vh; max-width: 98vw; } /* Abbassato su mobile per più spazio */
+      .logo-container { top: 7vh; max-width: 98vw; } 
       #audio-toggle { font-size: 2.0rem; }
       .btn { font-size: 1.08rem; }
-      .buttons { margin-top: 20vh; } /* Spazio aumentato su mobile */
+      .buttons { margin-top: 20vh; }
+      .section-title { font-size: 1.3rem; } /* Leggermente più piccolo su mobile */
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -169,12 +182,10 @@
 </head>
 <body>
 
-  <!-- Preloader -->
   <div id="preloader">
     <img src="NDA_TITOLO.png" alt="Logo" />
   </div>
 
-  <!-- Logo fisso in alto con pulsante audio subito sotto -->
   <div class="logo-container">
     <img src="NDA_TITOLO.png" alt="La Notte degli Arpeggiatori" />
     <button
@@ -185,21 +196,21 @@
       title="Attiva/Disattiva audio">🔊</button>
   </div>
 
-  <!-- Audio in background -->
   <audio id="bg-music" loop autoplay playsinline preload="auto" muted>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Contenuto principale: pulsanti -->
   <div class="container">
     <div class="buttons">
+      
+      <h2 class="section-title">Rivivi le emozioni della notte</h2>
+      
       <a href="https://drive.google.com/drive/folders/1OGhW8oS36n0ViZFuSdCfoEXwRB3PinVM?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma domenica">DOMENICA POMERIGGIO</a>
       <a href="https://drive.google.com/drive/folders/1F3P4h70Cv2iuX3ci3Nm36i_zQ3p24BA9?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma lunedì">DOMENICA SERA</a>
       <a href="https://drive.google.com/drive/folders/1fIP8qvFErmyRZU5x2rTPOBUtOJTsiiVP?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri notifiche live su WhatsApp">LUNEDÌ</a>
     </div>
   </div>
 
-  <!-- Banda di loghi scorrevoli -->
   <div id="logo-marquee-wrapper">
     <div id="logo-marquee">
       <a href="https://www.casarpege.it/" target="_blank" rel="noopener noreferrer">
@@ -241,7 +252,6 @@
     </div>
   </div>
 
-  <!-- Script -->
   <script>
     let audio, toggleBtn;
 
@@ -298,7 +308,8 @@
         }
         checkBtn();
       } else {
-        console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.');
+        // console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.'); 
+        // Commentato per pulizia console se il bottone non c'è più
       }
     });
   </script>
