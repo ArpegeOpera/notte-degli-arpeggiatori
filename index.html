@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="La Notte degli Arpeggiatori - Evento speciale con programma domenica e lunedì" />
   <meta name="keywords" content="arpeggiatori, evento, programma, domenica, lunedì" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>La Notte degli Arpeggiatori</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,16 +97,17 @@
       margin-top: 23vh; 
     }
 
-    /* --- NUOVO STILE PER IL TITOLO --- */
+    /* --- TITOLO AGGIORNATO (CORSIVO) --- */
     .section-title {
+      font-family: 'Great Vibes', cursive; /* Font corsivo elegante */
       color: #fff;
       text-align: center;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ombra per contrasto sfondo */
-      margin-bottom: 0.5vh; /* Spazio tra titolo e primo pulsante */
+      font-size: 2.8rem; /* Aumentato per leggibilità del corsivo */
+      font-weight: 400;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.9); /* Ombra più forte */
+      margin-bottom: 0.5vh; 
       letter-spacing: 1px;
+      line-height: 1.2;
     }
 
     .btn {
@@ -121,6 +122,7 @@
       text-align: center;
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: 'Montserrat', sans-serif; /* Assicura che i bottoni restino leggibili */
     }
     .btn:hover,
     .btn:active {
@@ -169,7 +171,7 @@
       #audio-toggle { font-size: 2.0rem; }
       .btn { font-size: 1.08rem; }
       .buttons { margin-top: 20vh; }
-      .section-title { font-size: 1.3rem; } /* Leggermente più piccolo su mobile */
+      .section-title { font-size: 2.4rem; } /* Adattamento mobile */
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -203,7 +205,7 @@
   <div class="container">
     <div class="buttons">
       
-      <h2 class="section-title">Rivivi le emozioni della notte</h2>
+      <h2 class="section-title">Rivivi la notte</h2>
       
       <a href="https://drive.google.com/drive/folders/1OGhW8oS36n0ViZFuSdCfoEXwRB3PinVM?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma domenica">DOMENICA POMERIGGIO</a>
       <a href="https://drive.google.com/drive/folders/1F3P4h70Cv2iuX3ci3Nm36i_zQ3p24BA9?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Apri programma lunedì">DOMENICA SERA</a>
@@ -307,9 +309,6 @@
           }
         }
         checkBtn();
-      } else {
-        // console.warn('Bottone "SCOPRI IL TUO TAVOLO" non trovato.'); 
-        // Commentato per pulizia console se il bottone non c'è più
       }
     });
   </script>
